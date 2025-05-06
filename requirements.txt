@@ -1,0 +1,11 @@
+# lib-ml @ https://github.com/remla-rstular/lib-ml/releases/download/v0.0.3/lib_ml-0.0.3-py3-none-any.whl
+lib-ml @ git+https://github.com/remla-rstular/lib-ml@v0.0.3
+asgiref==3.8.1
+Flask==3.1.0
+loguru==0.7.3
+python-dotenv==1.1.0
+requests==2.32.3
+joblib==1.5.0
+scikit-learn==1.6.1
+uvicorn==0.34.2
+pydantic==2.11.4
