@@ -1,4 +1,5 @@
 lib-ml @ https://github.com/remla-rstular/lib-ml/releases/download/v0.0.4/lib_ml-0.0.4-py3-none-any.whl
+lib-version @ https://github.com/remla-rstular/lib-version/releases/download/v0.0.3/lib_version-0.0.3-py3-none-any.whl
 asgiref==3.8.1
 Flask==3.1.0
 loguru==0.7.3

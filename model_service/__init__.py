@@ -5,8 +5,8 @@ from dotenv import load_dotenv
 from flask import Flask, jsonify, request
 from flask_httpauth import HTTPTokenAuth
 from lib_ml.preprocess import process_text
+from lib_version.dto import ModelServicePredictRequest, ModelServicePredictResponse
 
-from model_service.dto import ModelServicePredictRequest, ModelServicePredictResponse
 from model_service.github import download_model
 from model_service.ml_model import get_model, get_model_version, load_model
 
