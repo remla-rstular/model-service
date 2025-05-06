@@ -4,6 +4,7 @@ from asgiref.wsgi import WsgiToAsgi
 from dotenv import load_dotenv
 from flask import Flask, jsonify, request
 from flask_httpauth import HTTPTokenAuth
+from lib_ml.preprocess import process_text
 
 from model_service.dto import ModelServicePredictRequest, ModelServicePredictResponse
 from model_service.github import download_model
@@ -48,6 +49,8 @@ def predict():
     model = get_model()
     # Make the prediction
     pred_data = req_data.review if isinstance(req_data.review, list) else [req_data.review]
+    # Preprocess the data
+    pred_data = process_text(pred_data)
     try:
         prediction = model.predict(pred_data)
     except Exception as e:
