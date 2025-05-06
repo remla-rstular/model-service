@@ -3,6 +3,7 @@ FROM python:3.13-slim
 # Set the working directory
 WORKDIR /app
 
+# TODO: work around having to install git - access release URL?
 RUN apt-get update && \
 apt-get install --no-install-recommends -y git && \
 rm -rf /var/cache/apt/archives /var/lib/apt/lists/*

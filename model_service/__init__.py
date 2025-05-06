@@ -2,7 +2,7 @@ import os
 
 from asgiref.wsgi import WsgiToAsgi
 from dotenv import load_dotenv
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 from model_service.dto import ModelServicePredictRequest, ModelServicePredictResponse
 from model_service.github import download_model
@@ -23,7 +23,7 @@ def predict():
     try:
         req_data = ModelServicePredictRequest.model_validate(request.get_json())
     except Exception as e:
-        return {"error": str(e)}, 400
+        return jsonify({"error": str(e)}), 400
 
     # Get the model
     model = get_model()
@@ -32,7 +32,7 @@ def predict():
     try:
         prediction = model.predict(pred_data)
     except Exception as e:
-        return {"error": str(e)}, 500
+        return jsonify({"error": str(e)}), 500
 
     if isinstance(req_data.review, str):
         response = ModelServicePredictResponse(
@@ -40,17 +40,17 @@ def predict():
         )
     else:
         response = ModelServicePredictResponse(is_positive=[bool(p) for p in prediction])
-    return response.model_dump_json(), 200
+    return jsonify(response.model_dump_json()), 200
 
 
 @app.route("/version/model", methods=["GET"])
 def version():
-    return {"version": get_model_version()}, 200
+    return jsonify({"version": get_model_version()}), 200
 
 
 @app.route("/version/app", methods=["GET"])
 def app_version():
-    return {"version": os.getenv("SERVICE_VERSION")}, 200
+    return jsonify({"version": os.getenv("SERVICE_VERSION")}), 200
 
 
 asgi_app = WsgiToAsgi(app)
